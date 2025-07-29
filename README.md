@@ -21,9 +21,23 @@ Whether you're forecasting development value or analyzing neighborhood trends, t
 ```bash
 git clone https://github.com/shaligah/House-Price-Prediction-App.git
 ```
-### 2. Create or Acivate a python environment
-
-### 3. Install the dependencies
+### 2. Install dependencies
 pip install -r requirements.txt
+### 3. Run the app
+streamlit run streamlit_app.py
 
+---
+## 🧠 Model Info
+- Model Type: XGBoost Regressor
+- Target Variable: SalePrice (log-transformed during training)
+- Explainability Tool: SHAP for local instance-based interpretability
+
+---
+## 📊 Data
+- Source: Ames Housing Dataset, Us Bereau of Economics
+- Contains features like house size, quality, location, year built, and more
+- Cleaned and preprocessed for use in prediction and visualizatio
+
+---
+## 🔗 Live App
 
