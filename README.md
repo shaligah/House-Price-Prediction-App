@@ -34,9 +34,9 @@ streamlit run streamlit_app.py
 
 ---
 ## 📊 Data
-- Source: Ames Housing Dataset, Us Bereau of Economics
+- Source: Ames Housing Dataset, US Bereau of Economics
 - Contains features like house size, quality, location, year built, and more
-- Cleaned and preprocessed for use in prediction and visualizatio
+- Cleaned and preprocessed for use in prediction and visualization
 
 ---
 ## 🔗 Live App
