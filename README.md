@@ -14,3 +14,9 @@ The app delivers a **three-in-one functionality**:
 Whether you're forecasting development value or analyzing neighborhood trends, this app empowers data-driven decision-making at every level.
 
 ---
+## 🚀 How to Use This Repository
+
+### 🔧 1. Clone the Repository
+
+```bash
+git clone https://github.com/shaligah/House-Price-Prediction-App.git
