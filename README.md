@@ -20,3 +20,10 @@ Whether you're forecasting development value or analyzing neighborhood trends, t
 
 ```bash
 git clone https://github.com/shaligah/House-Price-Prediction-App.git
+```
+### 2. Create or Acivate a python environment
+
+### 3. Install the dependencies
+pip install -r requirements.txt
+
+
