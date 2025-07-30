@@ -22,10 +22,13 @@ Whether you're forecasting development value or analyzing neighborhood trends, t
 git clone https://github.com/shaligah/House-Price-Prediction-App.git
 ```
 ### 2. Install dependencies
+```bash
 pip install -r requirements.txt
+```
 ### 3. Run the app
+```bash
 streamlit run streamlit_app.py
-
+```
 ---
 ## 🧠 Model Info
 - Model Type: XGBoost Regressor
