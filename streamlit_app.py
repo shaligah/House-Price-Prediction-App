@@ -10,6 +10,7 @@ import joblib
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.preprocessing import OrdinalEncoder
 import shap
+from sklearn.metrics import mean_squared_error
 
 
 class DropMissingData(BaseEstimator, TransformerMixin):
@@ -129,7 +130,7 @@ st.title("🏠 House Price Prediction App")
 
 section = st.sidebar.selectbox(
     "Select a section",
-    ["Home", "Data Exploration", "Prediction", "Explainability"]
+    ["Home", "Data Exploration", "Prediction", "Explainability", 'Simulation']
 )
 data_uncleaned = pd.read_csv('train.csv')
 df_cleaned = pd.read_csv('df_cleaned.csv')
@@ -140,13 +141,17 @@ if section == "Home":
 
     st.markdown("""
 
-Welcome to your strategic edge in the housing market. This app is built for real estate developers, investors, analysts, and decision-makers looking to take their business to the next level.
+ 🏠 House Price Intelligence App
+
+Welcome to your strategic edge in the housing market.  
+This app is built for real estate developers, investors, analysts, and decision-makers looking to take their business to the next level.
 
 Whether you're pricing properties, exploring market trends, or evaluating development opportunities, this platform helps you move with confidence and clarity.
 
-🔍 Explore Data – Identify key patterns and trends driving the housing market.
-📈 Predict Prices – Estimate home values with a high-performing machine learning model.
-🧠 Explain Results – Understand exactly what factors influence each prediction using SHAP explanations.
+🔍 **Explore Data** – Identify key patterns and trends driving the housing market.  
+📈 **Predict Prices** – Estimate home values with a high-performing machine learning model.  
+🧠 **Explain Results** – Understand exactly what factors influence each prediction using SHAP explanations.  
+🎯 **Run Simulations** – Test "What-If" scenarios (e.g., increasing garage area by 20%) and instantly compare predictions to assess impact.
 
 With this app, you don’t just track the market — you lead it.
     """)
@@ -334,6 +339,9 @@ elif section=='Prediction':
                 unsafe_allow_html=True)
             cols = ['PredictedPrice'] + [col for col in new1.columns if col != 'PredictedPrice']
             st.write(new1[cols])
+            st.session_state.df = new1
+            st.session_state.model  = model
+            st.session_state.new_pred2 = new_pred2
 
 #Model & Results Explanation            
 elif section == 'Explainability':
@@ -414,5 +422,20 @@ elif section == 'Explainability':
                     fig2, ax2 = plt.subplots()
                     shap.plots.waterfall(explanation2, max_display=10, show=False)
                     st.pyplot(fig2)
-
+        
+elif section =='Simulation':
+    df_copy = st.session_state.df.copy()
+    baseline = st.session_state.df['PredictedPrice']
+    df_copy.drop(columns = 'PredictedPrice', inplace=True)
+    st.session_state.target = st.sidebar.selectbox("🎯 Select target variable", df_copy.columns)
+    percent = st.sidebar.select_slider('Percentage increase', options = range(101))
+    t_percent = 1+(percent/100)
+    df_copy[st.session_state.target] = df_copy[st.session_state.target] * t_percent
+    new_pred = st.session_state.model.predict(df_copy)
+    new_pred = np.exp(new_pred)
+    st.write(pd.DataFrame({
+        'Base Prediction Prices': baseline,
+        'Simulated Predicted Prices': [f"${x:,.2f}" for x in new_pred]
+    }))
+    st.write(f' There is an average difference of ${(np.sqrt(mean_squared_error(st.session_state.new_pred2,new_pred))):,.2f} when {st.session_state.target} was increased by {percent}%')
             
