@@ -141,7 +141,6 @@ if section == "Home":
 
     st.markdown("""
 
- 🏠 House Price Intelligence App
 
 Welcome to your strategic edge in the housing market.  
 This app is built for real estate developers, investors, analysts, and decision-makers looking to take their business to the next level.
@@ -439,3 +438,4 @@ elif section =='Simulation':
     }))
     st.write(f' There is an average difference of ${(np.sqrt(mean_squared_error(st.session_state.new_pred2,new_pred))):,.2f} when {st.session_state.target} was increased by {percent}%')
             
+
